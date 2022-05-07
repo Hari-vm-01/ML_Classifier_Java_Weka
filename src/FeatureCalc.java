@@ -80,6 +80,16 @@ public class FeatureCalc{
 		return instanceFromArray(valueArray, data.label);
 	}
 
+	public Instance calcFeatures(DataInstance data) {
+		if(isFirstInstance) {
+			isFirstInstance = false;
+			return calcFirstInstance(data);
+			
+		} else {
+			return calcOtherInstance(data);
+		}
+	}
+
 	
 
 	
