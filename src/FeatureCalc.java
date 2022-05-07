@@ -69,6 +69,18 @@ public class FeatureCalc{
 		return instanceFromArray(valueArray, data.label);
 		
 	}
+	
+	private Instance calcOtherInstance(DataInstance data) {
+		final double[] valueArray = new double[nfeatures+1];
+
+		for(int i = 0; i < nfeatures; i++){
+			valueArray[i] = data.measurements[i];
+		}
+		
+		return instanceFromArray(valueArray, data.label);
+	}
+
+	
 
 	
 
