@@ -41,6 +41,36 @@ public class FeatureCalc{
 
 		return instance;
 	}
+	
+	private Instance calcFirstInstance(DataInstance data) {
+		final ArrayList<Attribute> attrs = new ArrayList<>();
+		final ArrayList<Double> values = new ArrayList<>();
+		
+		//Have to consider adding more features to make model more accurate and robust to ambient noise
+
+		nfeatures = data.measurements.length;
+		
+		for(int i = 0; i < nfeatures; i++){
+			attrs.add(new Attribute("bin"+i, i));
+			values.add((double) data.measurements[i]);
+		}
+
+		/* build our dataset (instance header) */
+		attrs.add(new Attribute("classlabel", classLabels, nfeatures));
+		dataset = new Instances("dataset", attrs, 0);
+		dataset.setClassIndex(nfeatures);
+		
+		/* build the output instance */
+		double[] valueArray = new double[nfeatures+1];
+		for(int i=0; i<nfeatures; i++) {
+			valueArray[i] = values.get(i);
+		}
+		
+		return instanceFromArray(valueArray, data.label);
+		
+	}
+
+	
 
 	
 	
